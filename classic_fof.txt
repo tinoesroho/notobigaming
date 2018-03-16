@@ -1,0 +1,5 @@
+login anonymous
+force_install_dir classic_fof
+download_depot 265630 265631 578093207065284384
+download_depot 265630 265632 3647598854715723194
+quit
