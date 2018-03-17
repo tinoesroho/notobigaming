@@ -1,0 +1,134 @@
+#pragma semicolon 1
+
+#include <sourcemod>
+#include <sdktools>
+#include <sdkhooks>
+
+#define PLUGIN_VERSION "3.0.0"
+
+new Handle:g_Cvar_DropOnDeath = INVALID_HANDLE;
+
+new String:g_Weapons[24][] = 
+{
+"weapon_axe", "weapon_bow", "weapon_carbine", "weapon_coachgun", 
+"weapon_coltnavy", "weapon_coltnavy2", "weapon_deringer", "weapon_deringer2", 
+"weapon_dynamite", "weapon_dynamite_black", 
+"weapon_henryrifle", 
+"weapon_knife", "weapon_machete", 
+"weapon_maresleg", "weapon_maresleg2", "weapon_peacemaker", "weapon_peacemaker2", "weapon_remington", "weapon_remington2", 
+"weapon_remington_army", "weapon_remington_army2", "weapon_sawedoff_shotgun", "weapon_sawedoff_shotgun2", "weapon_schofield", "weapon_schofield2",
+"weapon_sharps", "weapon_shotgun", "weapon_spencer", 
+"weapon_volcanic", "weapon_volcanic2", 
+"weapon_walker", "weapon_walker2", 
+"weapon_whiskey"
+};
+
+public Plugin:myinfo =
+{
+	name = "FoF:BR Drop On Death",
+	author = "notobigaming + bigbalaboom",
+	description = "Drop weapons on death.",
+	version = PLUGIN_VERSION,
+	url = "www.sourcemod.net"
+};
+
+public OnPluginStart()
+{
+	CreateConVar("sm_drop_on_death_version", PLUGIN_VERSION, "Drop On Death Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+
+	g_Cvar_DropOnDeath = CreateConVar("sm_drop_on_death", "1", "Toggles plugin on and off.", FCVAR_PLUGIN);
+	AutoExecConfig(true, "drop_on_death");
+
+	HookConVarChange(g_Cvar_DropOnDeath, OnConVarChange);
+
+	AddCommandListener(Command_Kill, "kill");
+	AddCommandListener(Command_Kill, "explode");
+
+	HookEvent("player_hurt", Event_PlayerHurt);
+	HookEvent("player_spawn", Event_PlayerSpawn);
+
+	for (new i = 1; i <= MaxClients; i++)
+	{
+		if (IsClientInGame(i))
+		{
+			SDKHook(i, SDKHook_Touch, OnTouch);
+		}
+	}
+}
+
+public OnClientPutInServer(client)
+{
+	SDKHook(client, SDKHook_Touch, OnTouch);
+}
+
+public OnConfigsExecuted()
+{
+	GetConVars();
+}
+
+public OnConVarChange(Handle:cvar, const String:oldvalue[], const String:newvalue[])
+{
+	decl String:CvarName[64];
+	GetConVarName(cvar, CvarName, sizeof(CvarName));
+}
+
+
+
+public Action:Command_Kill(client, const String:command[], args)
+{
+	if (IsClientInGame(client) && IsPlayerAlive(client))
+	{
+		DropItems(client);
+		ForcePlayerSuicide(client);
+		return Plugin_Handled;
+	}
+	return Plugin_Continue;
+}
+
+public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(GetClientHealth(client) <= 0)
+	{
+		DropItems(client);
+	}
+}
+
+DropItems(client)
+{
+	if (GetConVarBool(g_Cvar_DropOnDeath))
+	{
+		new active_weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+		decl String:active_weapon_name[64];
+		GetEdictClassname(active_weapon, active_weapon_name, sizeof(active_weapon_name));
+
+		new slot2, slot3;
+
+		if ((slot2 = GetPlayerWeaponSlot(client, _:1)) != -1)
+		{
+			SDKHooks_DropWeapon(client, slot2, NULL_VECTOR, NULL_VECTOR);
+		}
+
+		if ((slot3 = GetPlayerWeaponSlot(client, _:2)) != -1 && GetConVarBool(g_Cvar_DropKnife))
+		{
+			SDKHooks_DropWeapon(client, slot3, NULL_VECTOR, NULL_VECTOR);
+		}
+		new slot4;
+		while((slot4 = GetPlayerWeaponSlot(client, _:3)) != -1)
+		{
+			SDKHooks_DropWeapon(client, slot4, NULL_VECTOR, NULL_VECTOR);
+			RemoveEdict(slot4);
+		}
+			g_ArmorSprites[client] = CreateEntityByName("env_sprite");
+				new String:EntitySpriteName[64];
+				Format(EntitySpriteName, sizeof(EntitySpriteName), "env_sprite_dod_%i", client);
+				DispatchKeyValue(g_ArmorSprites[client], "classname", EntitySpriteName);
+				DispatchKeyValue(g_ArmorSprites[client], "model", g_SpriteArmor);
+				DispatchKeyValue(g_ArmorSprites[client], "rendermode", "5");
+				DispatchKeyValue(g_ArmorSprites[client], "rendercolor", "255 255 255");
+				DispatchKeyValue(g_ArmorSprites[client], "renderamt", "255");
+				DispatchSpawn(g_ArmorSprites[client]);
+				position[2] += 20;
+				TeleportEntity(g_ArmorSprites[client], position, NULL_VECTOR, NULL_VECTOR);
+			}
+}
