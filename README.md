@@ -1,4 +1,5 @@
-# notobigaming
+![logo][https://tinoesroho.github.io/notobigaming/img/server_logo.png "NotObigaming"]
+#notobigaming
 > the server that was not Obigaming
 > 2016 - 2018
 
