@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>motd</title>
+<meta http-equiv="refresh" content="90">
+<style type="text/css">
+@keyframes backgroundScroll {
+0% { background-position: 50% 50%; }
+33% { background-position: 1% 50%; }
+40% { background-position: 1% 50%; }
+66% { background-position: 99% 50%; }
+75% { background-position: 99% 50%; }
+100% { background-position: 50% 50%; }}
+/* added pauses to each edge of the image */
+
+html {
+height: 100%;
+max-height: 100%;
+overflow: hidden;
+width: 100%;
+max-width: 100%;
+position: fixed;
+
+background-repeat: none;
+background-image: url(/img/background.jpg);
+background-attachment: fixed;
+max-height: 100%;
+overflow: hidden;
+background-size: cover;
+background-position: center center; 
+background-repeat: no-repeat;
+animation: backgroundScroll 60s ease-in-out 1s infinite;
+}
+
+body {
+position: fixed;
+overflow: hidden;
+}
+
+.test:before,#test:before{
+ content: " ";
+ background: inherit; 
+ position: absolute;
+ left: 0;
+ right: 0;
+ top: 0; 
+ bottom: 0;
+ //box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+ filter: blur(10px);
+ z-index:-1;
+}
+
+div {
+background-color: rgba(204, 204, 204, 0.2);
+}
+
+#discord {
+width: 25vw;
+display: block;
+margin: auto;
+}
+
+#test {
+//margin-left: calc(50% - 50vw); 
+width: 100vw;
+}
+</style>
+</head><body style="color: rgb(0, 0, 0); margin: 2%;" alink="#005400" link="#005400" vlink="#005400">
+<div id="test">
+<table style="text-align: center; margin: auto;"    border="0" cellpadding="2" cellspacing="2">
+<tbody>
+<tr>
+<td style="text-align: center;">
+<h1>Welcome to notObigaming!</h1>
+<span style="font-style: italic;">"No ads. No lag.
+More fun to frag."</span>
+<hr width="50%">
+<span style="font-weight: bold;">Admins:</span><br>
+<hr width="50%" height="3">
+[FF]Elite.Veritas<br>
+[fof_bb]-Fraggot-<br>
+[fof_bb] Lash<br>
+Niko! &#x24e2;
+<br>
+<br>
+<a href="steam://connect/162.248.94.134:27015/" target="_blank"><img src="http://cache.gametracker.com/server_info/162.248.94.134:27015/b_350_20_692108_381007_FFFFFF_000000.png" border="0" width="350" height="20" alt=""/></a>
+<br>
+<a href="steam://connect/162.248.94.134:27018/" target="_blank"><img src="http://cache.gametracker.com/server_info/162.248.94.134:27018/b_350_20_692108_381007_FFFFFF_000000.png" border="0" width="350" height="20" alt=""/></a>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<a href="https://discord.gg/ksUK7ta"><img id="discord" src="discord.png" /></a>
+</div>
+</body></html>
