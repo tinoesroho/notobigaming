@@ -1,6 +1,7 @@
 ![alt text](https://tinoesroho.github.io/notobigaming/img/server_logo.png "Logo Title Text 1")
 # notobigaming
 > the server that was not Obigaming
+
 > 2016 - 2018
 
 
@@ -15,7 +16,7 @@
 
 elo_fof
 ---
-License: GPL
+> License: GPL
 
 Based on [MikeJS's ELO Ranking plugin](https://forums.alliedmods.net/showthread.php?p=728645).
 
@@ -31,7 +32,7 @@ Based on [MikeJS's ELO Ranking plugin](https://forums.alliedmods.net/showthread.
 
 notobigaming_overlay
 ---
-License: GPL
+> License: GPL
 
 Based on [Round End Overlay by dataviruset](https://forums.alliedmods.net/showthread.php?p=1258365).
 
@@ -43,7 +44,7 @@ Instructions here: [http://steamcommunity.com/sharedfiles/filedetails/?id=126586
 
 roundsongs
 ---
-License: GPL
+> License: GPL
 
 Based on [Round Songs by 1Swat2KillThemAll](https://forums.alliedmods.net/showthread.php?p=1399574).
 
@@ -54,7 +55,7 @@ Based on [Round Songs by 1Swat2KillThemAll](https://forums.alliedmods.net/showth
 
 saysound_web
 ---
-License: GPL
+> License: GPL
 
 Based on [iesaba's SaySound Lite Lite Edition](https://github.com/iesaba/SaySound-Lite-Lite-Edition)
 
