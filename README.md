@@ -1,4 +1,16 @@
 # notobigaming
+> the server that was not Obigaming
+> 2016 - 2018
+
+
+## Custom Content
+> license: GPL
+
+- notify_when_live
+- fof_drop2
+- classic_drop
+
+## Forked Stuff
 
 elo_fof
 ---
@@ -38,3 +50,14 @@ Based on [Round Songs by 1Swat2KillThemAll](https://forums.alliedmods.net/showth
 
 - Volume dampened by default
 - More toggle triggers
+
+saysound_web
+---
+License: GPL
+
+Based on [iesaba's SaySound Lite Lite Edition](https://github.com/iesaba/SaySound-Lite-Lite-Edition)
+
+**Changes**
+
+- Points to a web-based player, rather than forced downloads
+- Theoretically: can easily add volume support
